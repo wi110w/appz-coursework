@@ -11,7 +11,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 class ProfileSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Profile
-        fields = ('url', 'user', 'gender', 'city', 'birthdate', 'role', 'image', 'artistprofile')
+        fields = ('url', 'user', 'gender', 'city', 'birthdate', 'role', 'image')
 
 
 class PictureSerializer(serializers.HyperlinkedModelSerializer):
