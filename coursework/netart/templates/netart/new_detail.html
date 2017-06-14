@@ -1,0 +1,28 @@
+{% extends 'netart/base.html' %}
+
+{% load staticfiles %}
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{% static 'netart/new_detail.css' %}">
+{% endblock %}
+{% block title %}Net|News{% endblock %}
+
+{% block content %}
+<div class="d-flex flex-row" style="margin-top: 110px">
+    <div class="p-2">
+        <h2><em>{{ news.title }}</em></h2>
+    </div>
+</div>
+<div class="d-flex flex-wrap">
+    <div class="p-2">
+        <img src="{{ news.image.url }}" class="rounded" width="90%" alt="news_image">
+    </div>
+    <div class="p-2">
+        <dl class="row">
+            <dt class="col-sm-3">Title:</dt><dd class="col-sm-9">{{ news.title }}</dd>
+            <dt class="col-sm-3">Text:</dt><dd class="col-sm-9">{{ news.text }}</dd>
+            <dt class="col-sm-3">When:</dt><dd class="col-sm-9">{{ news.expodate }}</dd>
+            <dt class="col-sm-3">Theme:</dt><dd class="col-sm-9">{{ news.expotheme }}</dd>
+        </dl>
+    </div>
+</div>
+{% endblock %}

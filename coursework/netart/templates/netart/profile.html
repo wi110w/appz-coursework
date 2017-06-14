@@ -1,0 +1,54 @@
+{% extends 'netart/base.html' %}
+
+{% load staticfiles %}
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{% static 'netart/profile.css' %}">
+{% endblock %}
+{% block title %}Net|Profile{% endblock %}
+
+{% block content %}
+<div class="d-flex flex-row" style="margin-top: 110px">
+    <div class="p-2">
+        <h2><em>{{user.username }}</em></h2>
+    </div>
+</div>
+<div class="d-flex flex-wrap">
+    <div class="p-2">
+        {% if user.profile.image == '' %}
+        <img src="{% static 'netart/images/no_avatar.jpg' %}" class="rounded" alt="profile_image">
+        {% else %}
+        <img src="{{ user.profile.image.url }}" class="rounded" width="30%" alt="profile_image">
+        {% endif %}
+    </div>
+    <div class="p-2">
+        <dl class="row">
+            <dt class="col-sm-3">Username:</dt><dd class="col-sm-9">{{ user.username }}</dd>
+            <dt class="col-sm-3">Full name:</dt><dd class="col-sm-9">{{ user.first_name }} {{ user.last_name }}</dd>
+            <dt class="col-sm-3">Birthdate:</dt><dd class="col-sm-9">{{ user.profile.birthdate }}</dd>
+            <dt class="col-sm-3">City:</dt><dd class="col-sm-9">{{ user.profile.city }}</dd>
+            {% if request.user.profile.role == 'artist' %}
+            <dt class="col-sm-3">Theme:</dt><dd class="col-sm-9">{{ user.artistprofile.theme }}</dd>
+            <dt class="col-sm-3">Style</dt><dd class="col-sm-9">{{ user.artistprofile.style }}</dd>
+            <dt class="col-sm-3">Pictures uploaded:</dt><dd class="col-sm-9">{{ user.artistprofile.picsuploaded }}</dd>
+            <dt class="col-sm-3">Messages:</dt><dd class="col-sm-9">{{ user.artistprofile.messages }}</dd>
+            {% endif %}
+        </dl>
+    </div>
+</div>
+<div class="d-flex flex-row">
+    <div class="p-2">
+        <form action="{% url 'netart:profile_edit' user.id %}" method="get">
+            <button class="btn btn-info" type="submit" value="Edit">
+                <span class="fa fa-pencil fa-1g"></span>
+            </button>
+        </form>
+    </div>
+    <div class="p-2">
+        <form action="{% url 'netart:upload_new_avatar' user.id %}" method="get">
+            <button class="btn btn-info" type="submit" value="Change avatar">
+                Change avatar
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

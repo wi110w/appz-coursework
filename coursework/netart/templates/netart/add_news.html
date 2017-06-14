@@ -1,0 +1,21 @@
+{% extends 'netart/base.html' %}
+
+{% load staticfiles %}
+{% load extras %}
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{% static 'netart/add.css' %}">
+{% endblock %}
+
+{% block title %}Net|News{% endblock %}
+
+{% block content %}
+<form action="{% url 'netart:add_news' %}" method="post" enctype="multipart/form-data"
+id="addnews-box">
+    {% csrf_token %}
+    <table class="table table-bordered table-condensed">
+    {{ form.as_table }}
+    </table>
+    <input type="submit" class="btn btn-default" value="Add"/>
+    <a href="{% url 'netart:index' %}">Cancel</a>
+</form>
+{% endblock %}

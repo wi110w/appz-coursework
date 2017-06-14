@@ -1,0 +1,18 @@
+{% extends 'netart/base.html' %}
+{% block title %}Net|Login{% endblock %}
+{% load widget_tweaks %}
+
+{% load staticfiles %}
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{% static 'netart/login.css' %}">
+{% endblock styles %}
+
+{% block nav_contents %}
+{% endblock nav_contents %}
+
+{% block content %}
+{% include "registration/login_form.html" %}
+{% endblock %}
+
+{% block login_modal %}
+{% endblock login_modal %}

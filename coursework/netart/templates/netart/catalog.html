@@ -1,0 +1,207 @@
+{% extends 'netart/base.html' %}
+
+{% load staticfiles %}
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{% static 'netart/index.css' %}"/>
+{% endblock %}
+{% block title %}Net|Art{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-center" style="margin-top: 5em">
+    <div class="btn-group" role="group">
+        <a href="#" class="btn btn-primary disabled" aria-disabled="true">Catalog</a>
+        <a href="{% url 'netart:index' %}" class="btn btn-outline-primary">News</a>
+        {% if user.profile.role == 'artist' %}
+        <a href="{% url 'netart:msg_box' %}" class="btn btn-outline-primary">Network</a>
+        {% endif %}
+    </div>
+</div>
+<div class="d-flex flex-row">
+    <div class="p-2">
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#nature" role="tab">Nature</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#people" role="tab">People</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#sketch" role="tab">Sketch</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#animals" role="tab">Animals</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane active" id="nature" role="tabpanel">
+                {% if pages_nat.object_list %}
+                <div class="card-deck mt-5">
+                    {% for picture in pages_nat.object_list %}
+                    <div class="card">
+                        <img class="card-img-top" src="{{ picture.image.url }}" alt="Card image cap" width="50%">
+                        <div class="card-block">
+                            <a class="card-title" href="#">{{ picture.title }}</a>
+                            <footer class="card-footer text-muted">By {{ picture.author.username }}</footer>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+            {% if pages_nat.paginator.count %}
+            <nav aria-label="Page navigation" class="text-center">
+                <ul class="pagination">
+                    <li class="page-item">
+                        {% if pages_nat.has_previous %}
+                        <a class="page-link" href="?page={{ pages.previous_page_number }}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                        {% endif %}
+                    </li>
+                    <li class="page-item">
+                        {% if pages_nat.has_next %}
+                        <a class="page-link" href="?page={{ pages.next_page_number }}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                        {% endif %}
+                    </li>
+                </ul>
+            </nav>
+            {% endif %}
+            <div class="tab-pane" id="people" role="tabpanel">
+                {% if pages_people.object_list %}
+                <div class="card-deck mt-5">
+                    {% for picture in pages_people.object_list %}
+                    <div class="card">
+                        <img class="card-img-top" src="{{ picture.image.url }}" alt="Card image cap" width="50%">
+                        <div class="card-block">
+                            <a class="card-title" href="#">{{ picture.title }}</a>
+                            <footer class="card-footer text-muted">By {{ picture.author }}</footer>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+            {% if pages_nat.paginator.count %}
+            <nav aria-label="Page navigation" class="text-center">
+                <ul class="pagination">
+                    <li class="page-item">
+                        {% if pages_nat.has_previous %}
+                        <a class="page-link" href="?page={{ pages.previous_page_number }}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                        {% endif %}
+                    </li>
+                    <li class="page-item">
+                        {% if pages_nat.has_next %}
+                        <a class="page-link" href="?page={{ pages.next_page_number }}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                        {% endif %}
+                    </li>
+                </ul>
+            </nav>
+            {% endif %}
+            <div class="tab-pane" id="sketch" role="tabpanel">
+                {% if pages_sketch.object_list %}
+                <div class="card-deck mt-5">
+                    {% for picture in pages_sketch.object_list %}
+                    <div class="card">
+                        <img class="card-img-top" src="{{ picture.image.url }}" alt="Card image cap" width="50%">
+                        <div class="card-block">
+                            <a class="card-title" href="#">{{ picture.title }}</a>
+                            <footer class="card-footer text-muted">By {{ picture.author }}</footer>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+            {% if pages_nat.paginator.count %}
+            <nav aria-label="Page navigation" class="text-center">
+                <ul class="pagination">
+                    <li class="page-item">
+                        {% if pages_nat.has_previous %}
+                        <a class="page-link" href="?page={{ pages.previous_page_number }}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                        {% endif %}
+                    </li>
+                    <li class="page-item">
+                        {% if pages_nat.has_next %}
+                        <a class="page-link" href="?page={{ pages.next_page_number }}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                        {% endif %}
+                    </li>
+                </ul>
+            </nav>
+            {% endif %}
+            <div class="tab-pane" id="animals" role="tabpanel">
+                {% if pages_anim.object_list %}
+                <div class="card-deck mt-5">
+                    {% for picture in pages_anim.object_list %}
+                    <div class="card">
+                        <img class="card-img-top" src="{{ picture.image.url }}" alt="Card image cap" width="50%">
+                        <div class="card-block">
+                            <a class="card-title" href="#">{{ picture.title }}</a>
+                            <footer class="card-footer text-muted">By {{ picture.author }}</footer>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        {% if pages_nat.paginator.count %}
+            <nav aria-label="Page navigation" class="text-center">
+                <ul class="pagination">
+                    <li class="page-item">
+                        {% if pages_nat.has_previous %}
+                        <a class="page-link" href="?page={{ pages.previous_page_number }}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                        {% endif %}
+                    </li>
+                    <li class="page-item">
+                        {% if pages_nat.has_next %}
+                        <a class="page-link" href="?page={{ pages.next_page_number }}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                        {% endif %}
+                    </li>
+                </ul>
+            </nav>
+            {% endif %}
+    </div>
+    <div class="mt-4 p-2" style="margin-right: -40px">
+        <form action="{% url 'netart:upload' %}" method="get">
+            <button class="btn btn-info" type="submit">
+                <span class="fa fa-plus-square-o fa-2x"></span>
+            </button>
+        </form>
+    </div>
+    <div class="mt-4 p-2" style="margin-left: 15em">
+        <div class="card mt-5">
+            <div class="card-block">
+                <h4 class="card-title">Recently added</h4>
+            </div>
+            {% if recently %}
+            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner" role="listbox">
+                    <div class="carousel-item active">
+                        <img class="d-block img-fluid" src="{{ recently.first.image.url }}" alt="picture">
+                    </div>
+                    {% for recent in recently %}
+                    <div class="carousel-item">
+                        <img class="d-block img-fluid" src="{{ recent.image.url }}" alt="picture">
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

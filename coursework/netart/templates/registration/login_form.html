@@ -1,0 +1,27 @@
+{% load widget_tweaks %}
+<div id="login-box" class="center-block ">
+<form action="{% url 'auth_login' %}" method="post">
+    {% csrf_token %}
+
+    {% for e in form.non_field_errors %}
+    <div class="alert alert-danger" role="alert">
+        <span class="fa fa-exclamation-triangle fa-1g"></span> {{e}}</div>
+    {%endfor%}
+    <div class="form-group">
+        <label id="{{form.username.id_for_label}}" class="control-label">{{ form.username.label }}</label>
+            {% render_field form.username class+="form-control" %}
+            {{ form.username.errors }}
+    </div>
+    <div class="form-group">
+        <label id="{{form.password.id_for_label}}" class="control-label">{{ form.password.label }}</label>
+            {% render_field form.password class+="form-control" %}
+            {{ form.password.errors }}
+    </div>
+    <div>
+    <button type="submit" class="btn btn-primary" value="Log in">
+        <span class="fa fa-sign-in fa-1g"></span> Log in
+    </button>
+    <a href="{% url 'registration_register' %}" >Sign up</a>
+    </div>
+</form>
+</div>

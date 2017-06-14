@@ -1,0 +1,21 @@
+{% extends 'netart/base.html' %}
+
+{% load staticfiles %}
+{% load extras %}
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{% static 'netart/send.css' %}">
+{% endblock %}
+
+{% block title %}Net|Messages{% endblock %}
+
+{% block content %}
+<form action="{% url 'netart:send_msg' %}" method="post"
+id="send-box">
+    {% csrf_token %}
+    <table class="table table-bordered table-condensed">
+    {{ form.as_table }}
+    </table>
+    <input type="submit" class="btn btn-default" value="Send"/>
+    <a href="{% url 'netart:msg_box' %}">Cancel</a>
+</form>
+{% endblock %}

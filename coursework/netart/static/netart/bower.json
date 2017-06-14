@@ -1,0 +1,13 @@
+{
+  "name": "wise-choice",
+  "authors": [
+    "cl0ne"
+  ],
+  "license": "Apache-2.0",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "4.0.0-alpha.6",
+    "font-awesome": "^4.7.0"
+  }
+}
+

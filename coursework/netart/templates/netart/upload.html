@@ -1,0 +1,16 @@
+{% extends 'netart/base.html' %}
+
+{% load staticfiles %}
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{% static 'netart/upload.css' %}">
+{% endblock %}
+{% block title %}Net|Catalog{% endblock %}
+
+{% block content %}
+  <form method="post" enctype="multipart/form-data" id="upload-box" action="{% url 'netart:upload' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Upload</button>
+    <a href="{% url 'netart:catalog' %}">Cancel</a>
+  </form>
+{% endblock %}

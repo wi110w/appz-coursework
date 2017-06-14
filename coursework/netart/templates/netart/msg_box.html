@@ -1,0 +1,96 @@
+{% extends 'netart/base.html' %}
+
+{% load staticfiles %}
+{% load extras %}
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{% static 'netart/edit.css' %}">
+{% endblock %}
+
+{% block title %}Net|Messages{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-center" style="margin-top: 5em">
+    <div class="btn-group" role="group">
+        <a href="{% url 'netart:catalog' %}" class="btn btn-outline-primary">Catalog</a>
+        <a href="{% url 'netart:index' %}" class="btn btn-outline-primary">News</a>
+        <a href="#" class="btn btn-primary disabled" aria-disabled="true">Network</a>
+    </div>
+</div>
+<div class="d-flex flex-row">
+    <div class="mt-5 p-2">
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#inbox" role="tab">Inbox</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#sent" role="tab">Sent</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane active" id="inbox" role="tabpanel">
+                <table class="table table-hover" style="width: 950px">
+                    <thead class="thead-inverse">
+                    <tr>
+                        <th>From</th>
+                        <th>Message</th>
+                        <th>When</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% if msgs %}
+                    {% for msg in msgs %}
+                    <tr>
+                        <td>{{ msg.sender.username }}</td>
+                        <td>{{ msg.msg_content }}</td>
+                        <td>{{ msg.created_at }}</td>
+                    </tr>
+                    {% endfor %}
+                    {% else %}
+                    <tr>
+                        <td></td>
+                        <td>No incoming messages.</td>
+                        <td></td>
+                    </tr>
+                    {% endif %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="tab-pane" id="sent" role="tabpanel">
+                <table class="table table-hover" style="width: 950px">
+                    <thead class="thead-inverse">
+                    <tr>
+                        <th>To</th>
+                        <th>Message</th>
+                        <th>When</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% if sents %}
+                    {% for sent in sents %}
+                    <tr>
+                        <td>{{ sent.receiver.username }}</td>
+                        <td>{{ sent.msg_content }}</td>
+                        <td>{{ sent.created_at }}</td>
+                    </tr>
+                    {% endfor %}
+                    {% else %}
+                    <tr>
+                        <td></td>
+                        <td>No sent messages.</td>
+                        <td></td>
+                    </tr>
+                    {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="mt-5 p-2">
+        <form action="{% url 'netart:send_msg' %}" method="get">
+            <button class="btn btn-info" type="submit" value="Send message">
+                <span class="fa fa-paper-plane-o fa-1g"></span>Send message
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

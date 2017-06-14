@@ -1,0 +1,21 @@
+{% extends 'netart/base.html' %}
+
+{% load staticfiles %}
+{% load extras %}
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{% static 'netart/edit.css' %}">
+{% endblock %}
+
+{% block title %}Net|Profile{% endblock %}
+
+{% block content %}
+<form action="{% url 'netart:upload_new_avatar' user.id %}" method="post" enctype="multipart/form-data"
+id="edit-box">
+    {% csrf_token %}
+    <table class="table table-bordered table-condensed">
+    {{ form.as_table }}
+    </table>
+    <input type="submit" class="btn btn-default" value="Change"/>
+    <a href="{% url 'netart:profile' user.id %}">Cancel</a>
+</form>
+{% endblock %}
